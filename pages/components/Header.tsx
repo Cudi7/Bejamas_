@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import FilterSelector from "./FilterSelector";
+
+const people = [{ name: "Price" }, { name: "Name" }];
 
 const Header = () => {
+  const [selected, setSelected] = useState(people[0]);
+
   return (
     <div className=" mt-[45px] flex justify-between  lg:mt-[71px]">
       <h3
@@ -10,7 +15,7 @@ const Header = () => {
         Photography <span className="text-[34px]">/</span>{" "}
         <span className="font-normal text-[#9B9B9B]">Premium Photos</span>
       </h3>
-      <div className=" hidden  items-center gap-3 lg:flex">
+      <div className=" hidden  items-center gap-3 text-[22px] lg:flex">
         <p className="flex items-center gap-2 text-[#9B9B9B]">
           <img
             src="./sortIcon.svg"
@@ -19,7 +24,8 @@ const Header = () => {
           />
           Sort By
         </p>
-        <ul>
+        <FilterSelector />
+        {/* <ul>
           <li className="flex items-center gap-2">
             Price
             <img
@@ -28,8 +34,7 @@ const Header = () => {
               className="h-[8px] w-[16px]"
             />
           </li>
-          {/* <li>Name</li> */}
-        </ul>
+        </ul> */}
       </div>
       <div className="flex  lg:hidden">
         <img src="./filterIcon.svg" alt="filter icon" />

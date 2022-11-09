@@ -8,16 +8,6 @@ import {
 import { fetchNewPage } from "../helpers/products.api";
 import { Data, DataEntity, SortBy } from "../interfaces/product.interface";
 
-const initialCategoryData = [
-  "people",
-  "premium",
-  "pets",
-  "food",
-  "landmarks",
-  "cities",
-  "nature",
-];
-
 const initialSortData: SortBy = {
   key: "price",
   type: "ASC",
@@ -93,6 +83,7 @@ const useProductsController = () => {
     currentSortBy,
     setCurrentPage,
     currentPage,
+    setCurrentSortBy,
   };
 };
 
@@ -106,6 +97,7 @@ const ProductsContext = createContext<ReturnType<typeof useProductsController>>(
     currentSortBy: initialSortData,
     setCurrentPage: () => {},
     currentPage: { oldPage: 1, newPage: 1 },
+    setCurrentSortBy: () => {},
   }
 );
 

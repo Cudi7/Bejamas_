@@ -1,12 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useProducts } from "../src/contexts/products.context";
-import {
-  fetchInitialData,
-  handleFetchByCategory,
-} from "../src/helpers/products.api";
-import { Data, Product } from "../src/interfaces/product.interface";
+import { fetchInitialData } from "../src/helpers/products.api";
+import { Data } from "../src/interfaces/product.interface";
 import Actions from "./components/Actions";
 import Featured from "./components/Featured";
 import Header from "./components/Header";
@@ -19,13 +16,6 @@ const Home: NextPage<Data> = (props: Data) => {
 
   useEffect(() => {
     setCurrentData(props);
-  }, []);
-
-  useEffect(() => {
-    // const handleFetch = async () => {
-    //   setProducts(await handleFetchByCategory(currentFilters));
-    // };
-    // if (currentFilters.length) handleFetch();
   }, []);
 
   return (

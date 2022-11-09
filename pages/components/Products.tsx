@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Product } from "../../src/interfaces/product.interface";
+import { DataEntity } from "../../src/interfaces/product.interface";
 import Pagination from "./Pagination";
 import { fetchNewPage } from "../../src/helpers/products.api";
 import { useProducts } from "../../src/contexts/products.context";
@@ -14,7 +14,7 @@ const parseNewPage = (pageNumber: number): number => {
 const Products = () => {
   const { currentData, setCurrentPage, currentPage } = useProducts();
 
-  const [currentProductList, setCurrentProductList] = useState<Product[]>();
+  const [currentProductList, setCurrentProductList] = useState<DataEntity[]>();
 
   useEffect(() => {
     setCurrentProductList(currentData?.data!.filter((el) => !el.featured));
