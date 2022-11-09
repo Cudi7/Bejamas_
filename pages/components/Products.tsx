@@ -40,6 +40,7 @@ const Products = () => {
                 className={`${
                   index > 2 ? "hidden lg:block" : ""
                 } group relative`}
+                key={index}
               >
                 <Image
                   width={362.39}

@@ -17,6 +17,7 @@ const Hero = () => {
             width={1290}
             className="min-h-[239px]"
             quality={100}
+            priority={true}
           />
         ) : null}
         <span

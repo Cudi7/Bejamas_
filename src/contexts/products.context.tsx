@@ -81,6 +81,10 @@ const useProductsController = () => {
     }
   };
 
+  const handleCategoriesMobile = (filter: string[]) => {
+    setCurrentCategory(filter);
+  };
+
   return {
     setCurrentData,
     currentData,
@@ -94,6 +98,7 @@ const useProductsController = () => {
     handleClearCartItems,
     handleNewCartItem,
     cartItems,
+    handleCategoriesMobile,
   };
 };
 
@@ -111,6 +116,7 @@ const ProductsContext = createContext<ReturnType<typeof useProductsController>>(
     handleClearCartItems: () => {},
     handleNewCartItem: () => {},
     cartItems: [],
+    handleCategoriesMobile: () => {},
   }
 );
 

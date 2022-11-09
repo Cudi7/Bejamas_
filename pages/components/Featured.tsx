@@ -26,7 +26,7 @@ const Featured = () => {
         <ul className="flex gap-[20px] lg:gap-[35px]">
           {featuredProduct
             ? featuredProduct[0]?.people_also_buy?.map((el, index) => (
-                <li>
+                <li key={el?._id}>
                   <Image
                     width={102}
                     height={131}
