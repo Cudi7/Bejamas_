@@ -18,6 +18,13 @@ const Navbar = () => {
     console.log(cartItems);
   }, [cartItems]);
 
+  const handleClose = (): void => setIsOpen(false);
+  const handleOpen = (): void => {
+    if (cartItems.length) {
+      setIsOpen(true);
+    }
+  };
+
   return (
     <nav className=" flex h-[100%] items-center  ">
       <ul className="flex w-[100%] items-center justify-between">
@@ -33,6 +40,7 @@ const Navbar = () => {
             strokeWidth={1.5}
             stroke="currentColor"
             className=" h-[32px] w-[32px] lg:h-[54px] lg:w-[54px]"
+            onClick={handleOpen}
           >
             <path
               strokeLinecap="round"
@@ -48,15 +56,22 @@ const Navbar = () => {
           <span
             className={`${
               isOpen ? "flex" : "hidden"
-            } absolute right-0 z-10 max-h-[30vw] flex-col overflow-y-scroll border border-slate-200 bg-white p-4 lg:w-[443px]`}
+            } absolute right-0 z-10 max-h-[30vw] flex-col overflow-y-scroll border border-slate-200 bg-white p-4 lg:w-[390px]`}
           >
-            <img className="ml-auto" src="./x.svg" alt="Close Icon" />
+            <img
+              className="ml-auto"
+              src="./x.svg"
+              alt="Close Icon"
+              onClick={handleClose}
+            />
             {cartItems.map((el, index) => (
               <>
-                <div className="my-5 flex justify-between">
+                <div className="my-5  flex justify-between">
                   <div>
-                    <h5>{el.name.split(" ")[0]}</h5>
-                    <p>${el.price}</p>
+                    <h5 className="text-[20px] font-bold">
+                      {el.name.split(" ")[0]}
+                    </h5>
+                    <p className="text-[29px] text-[#656565]">${el.price}</p>
                   </div>
                   <Image
                     src={el.image.src}
@@ -67,13 +82,13 @@ const Navbar = () => {
                   />
                 </div>
                 {index < cartItems.length - 1 ? (
-                  <div className="w-[388px] border border-slate-100"></div>
+                  <div className="w-[100%] border border-slate-100"></div>
                 ) : null}
               </>
             ))}
             <button
               onClick={handleClearCartItems}
-              className="flex h-[55px] w-[392px] items-center justify-center border-2 border-slate-900 p-4 text-[1.438rem]"
+              className="flex h-[55px] w-[100%] items-center justify-center border-2 border-black  text-[1.438rem]"
             >
               Clear
             </button>
