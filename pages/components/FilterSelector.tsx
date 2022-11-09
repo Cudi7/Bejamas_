@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { useProducts } from "../../src/contexts/products.context";
-// import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 const people = [{ name: "Price" }, { name: "Name" }];
 
@@ -10,10 +9,6 @@ export default function FilterSelector() {
   const [selected, setSelected] = useState(people[0]);
 
   useEffect(() => {
-    console.log({
-      key: selected.name.toLowerCase(),
-      type: "ASC",
-    });
     setCurrentSortBy({
       key: selected.name.toLowerCase(),
       type: "ASC",

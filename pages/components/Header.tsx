@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import FilterSelector from "./FilterSelector";
-
-const people = [{ name: "Price" }, { name: "Name" }];
+import FilterSelectorMobile from "./FilterSelectorMobile";
 
 const Header = () => {
-  const [selected, setSelected] = useState(people[0]);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleCategories = () => {};
+
+  const handleOpen = (): void => {
+    if (!isOpen) setIsOpen(true);
+  };
+
+  const handleClose = (): void => setIsOpen(false);
 
   return (
     <div className=" mt-[45px] flex justify-between  lg:mt-[71px]">
@@ -36,9 +43,7 @@ const Header = () => {
           </li>
         </ul> */}
       </div>
-      <div className="flex  lg:hidden">
-        <img src="./filterIcon.svg" alt="filter icon" />
-      </div>
+      <FilterSelectorMobile />
     </div>
   );
 };

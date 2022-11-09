@@ -15,7 +15,6 @@ const Navbar = () => {
       setIsOpen(false);
       setCurrentCartItems(0);
     }
-    console.log(cartItems);
   }, [cartItems]);
 
   const handleClose = (): void => setIsOpen(false);
@@ -56,7 +55,7 @@ const Navbar = () => {
           <span
             className={`${
               isOpen ? "flex" : "hidden"
-            } absolute right-0 z-10 max-h-[30vw] flex-col overflow-y-scroll border border-slate-200 bg-white p-4 lg:w-[390px]`}
+            } absolute right-0 z-10 max-h-[400px] flex-col overflow-y-scroll border border-slate-200 bg-white p-4 lg:max-h-[30vw] lg:w-[390px]`}
           >
             <img
               className="ml-auto"
@@ -66,7 +65,7 @@ const Navbar = () => {
             />
             {cartItems.map((el, index) => (
               <>
-                <div className="my-5  flex justify-between">
+                <div className="my-5  flex justify-between gap-5">
                   <div>
                     <h5 className="text-[20px] font-bold">
                       {el.name.split(" ")[0]}

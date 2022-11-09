@@ -3,7 +3,8 @@ import React from "react";
 import { useProducts } from "../../src/contexts/products.context";
 
 const Hero = () => {
-  const { featuredProduct } = useProducts();
+  const { featuredProduct, handleNewCartItem } = useProducts();
+
   return (
     <section className="relative mt-[2rem] mb-[2.188rem] flex  max-h-[627px] flex-col font-bold lg:mt-[3.625rem] lg:mb-[2.625rem]">
       <h1 className="text-3xl ">Samurai King Resting</h1>
@@ -25,7 +26,12 @@ const Hero = () => {
           Photo of the day
         </span>
       </div>
-      <button className="h-[3.8125rem] w-full bg-black text-white lg:absolute lg:right-0  lg:order-first lg:ml-auto lg:h-[2.9375rem] lg:w-[16.0625rem]">
+      <button
+        onClick={() =>
+          featuredProduct ? handleNewCartItem(featuredProduct[0]) : null
+        }
+        className="h-[3.8125rem] w-full bg-black text-white lg:absolute lg:right-0  lg:order-first lg:ml-auto lg:h-[2.9375rem] lg:w-[16.0625rem]"
+      >
         ADD TO CART
       </button>
     </section>
