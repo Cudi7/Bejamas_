@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useProducts } from "../../src/contexts/products.context";
 
 const categoriesItems: string[] = [
   "People",
@@ -14,15 +15,15 @@ interface handleFiltersProps {
   handleFilters: (filter: string, isChecked: boolean) => void;
 }
 
-const Actions = ({ handleFilters }: handleFiltersProps) => {
-  const [currentFilters, setCurrentFilters] = useState<string[]>([]);
+const Actions = () => {
+  const { handleCategories } = useProducts();
 
   const handleInputCheck = (
     e: React.ChangeEvent<HTMLInputElement>,
     item: string
   ): void => {
     const isChecked = e.target.checked;
-    handleFilters(item.toLowerCase(), isChecked);
+    handleCategories(item.toLowerCase(), isChecked);
   };
 
   return (

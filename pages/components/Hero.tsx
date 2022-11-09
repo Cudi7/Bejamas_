@@ -1,12 +1,9 @@
 import Image from "next/image";
 import React from "react";
-import { Product } from "../../interfaces/product.interface";
+import { useProducts } from "../../src/contexts/products.context";
 
-interface HeroProps {
-  featuredProduct: Product[] | undefined;
-}
-
-const Hero = ({ featuredProduct }: HeroProps) => {
+const Hero = () => {
+  const { featuredProduct } = useProducts();
   return (
     <section className="relative mt-[2rem] mb-[2.188rem] flex  max-h-[627px] flex-col font-bold lg:mt-[3.625rem] lg:mb-[2.625rem]">
       <h1 className="text-3xl ">Samurai King Resting</h1>

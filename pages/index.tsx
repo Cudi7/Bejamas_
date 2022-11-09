@@ -1,8 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { handleFetchByFilter } from "../helpers/products.api";
-import { Product } from "../interfaces/product.interface";
+import { useProducts } from "../src/contexts/products.context";
+import {
+  fetchInitialData,
+  handleFetchByCategory,
+} from "../src/helpers/products.api";
+import { Data, Product } from "../src/interfaces/product.interface";
 import Actions from "./components/Actions";
 import Featured from "./components/Featured";
 import Header from "./components/Header";
@@ -10,42 +14,19 @@ import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Products from "./components/Products";
 
-const Home: NextPage = ({ data }) => {
-  const [products, setProducts] = useState<Product[] | null>(null);
-  const [currentData, setCurrentData] = useState(null);
-  const [currentFilters, setCurrentFilters] = useState<string[]>([]);
+const Home: NextPage<Data> = (props: Data) => {
+  const { setCurrentData } = useProducts();
 
   useEffect(() => {
-    if (!products) {
-      setProducts(data.data);
-    }
-    if (!currentData) {
-      setCurrentData(data);
-    }
-  }, [data]);
+    setCurrentData(props);
+  }, []);
 
   useEffect(() => {
-    const handleFetch = async () => {
-      setProducts(await handleFetchByFilter(currentFilters));
-    };
-
-    if (currentFilters.length) handleFetch();
-  }, [currentFilters]);
-
-  const handleFilters = (filter: string, isChecked: boolean) => {
-    if (isChecked) {
-      setCurrentFilters([...currentFilters, filter]);
-    }
-    if (!isChecked) {
-      const newFilters = currentFilters.filter((tag) => tag !== filter);
-
-      setCurrentFilters(newFilters);
-    }
-  };
-
-  const featuredProduct: Product[] | undefined = products?.filter(
-    (el) => el.featured
-  );
+    // const handleFetch = async () => {
+    //   setProducts(await handleFetchByCategory(currentFilters));
+    // };
+    // if (currentFilters.length) handleFetch();
+  }, []);
 
   return (
     <div className="container mx-auto  max-w-[1291px] ">
@@ -58,14 +39,14 @@ const Home: NextPage = ({ data }) => {
       </header>
       <div id="divier" className="  border-b-4 bg-[#E4E4E4] px-0"></div>
       <main className="px-[15px] xl:px-0">
-        <Hero featuredProduct={featuredProduct} />
-        <Featured featuredProduct={featuredProduct} />
+        <Hero />
+        <Featured />
         <div id="divier" className="  border-b-4 bg-[#E4E4E4] px-0"></div>
         <section>
           <Header />
           <div className="mt-[27px] flex  lg:mt-[69px]">
-            <Actions handleFilters={handleFilters} />
-            <Products products={products} />
+            <Actions />
+            <Products />
           </div>
         </section>
       </main>
@@ -75,25 +56,10 @@ const Home: NextPage = ({ data }) => {
 
 export default Home;
 
-export async function getStaticProps(): Promise<unknown> {
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+export async function getStaticProps() {
+  const dataProps: Data = await fetchInitialData();
+
+  return {
+    props: { ...dataProps },
   };
-
-  try {
-    const fetchResponse: Response = await fetch(
-      "https://technical-frontend-api.bokokode.com/api/products",
-      options
-    );
-    const { data } = await fetchResponse.json();
-
-    return {
-      props: { data },
-    };
-  } catch (e) {
-    return e;
-  }
 }

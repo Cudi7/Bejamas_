@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Product } from "../../interfaces/product.interface";
+import { Product } from "../../src/interfaces/product.interface";
 import Pagination from "./Pagination";
-import { fetchNewPage } from "../../helpers/products.api";
-
-interface ProductsProps {
-  products: Product[] | null;
-}
-interface currentPageInt {
-  oldPage: number;
-  newPage: number;
-}
+import { fetchNewPage } from "../../src/helpers/products.api";
+import { useProducts } from "../../src/contexts/products.context";
 
 const parseNewPage = (pageNumber: number): number => {
   if (pageNumber === 0) return 9;
@@ -18,23 +11,14 @@ const parseNewPage = (pageNumber: number): number => {
   return pageNumber;
 };
 
-const Products = ({ products }: ProductsProps) => {
+const Products = () => {
+  const { currentData, setCurrentPage, currentPage } = useProducts();
+
   const [currentProductList, setCurrentProductList] = useState<Product[]>();
-  const [currentPage, setCurrentPage] = useState<currentPageInt>({
-    oldPage: 1,
-    newPage: 1,
-  });
 
   useEffect(() => {
-    setCurrentProductList(products?.filter((el) => !el.featured));
-  }, [products]);
-
-  useEffect(() => {
-    const handleFetch = async () => {
-      setCurrentProductList(await fetchNewPage(currentPage.newPage));
-    };
-    if (currentPage.oldPage !== currentPage.newPage) handleFetch();
-  }, [currentPage]);
+    setCurrentProductList(currentData?.data!.filter((el) => !el.featured));
+  }, [currentData]);
 
   const handlePageChange = (direction: string): void => {
     setCurrentPage({

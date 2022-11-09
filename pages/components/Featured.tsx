@@ -1,12 +1,10 @@
 import Image from "next/image";
 import React from "react";
-import { Product } from "../../interfaces/product.interface";
+import { useProducts } from "../../src/contexts/products.context";
 
-interface FeaturedProps {
-  featuredProduct: Product[] | undefined;
-}
+const Featured = () => {
+  const { featuredProduct } = useProducts();
 
-const Featured = ({ featuredProduct }: FeaturedProps) => {
   return (
     <section className="mb-[5.938rem] flex flex-wrap justify-between lg:mb-[7.5rem]">
       <div className="max-w-[43.125rem]">
@@ -27,24 +25,24 @@ const Featured = ({ featuredProduct }: FeaturedProps) => {
         <h2 className="mb-[50px] text-[1.375rem] font-bold">People also buy</h2>
         <ul className="flex gap-[20px] lg:gap-[35px]">
           {featuredProduct
-            ? featuredProduct[0]?.people_also_buy.map((el, index) => (
+            ? featuredProduct[0]?.people_also_buy?.map((el, index) => (
                 <li>
                   <Image
                     width={102}
                     height={131}
-                    src={el.image.src}
-                    alt={el.image.alt}
+                    src={el!.image.src}
+                    alt={el!.image.alt}
                     className="h-[131px] lg:h-[147px] lg:w-[117px]"
                   />
                   <h5 className="mt-[12px] text-[13px] font-bold text-[#656565]">
-                    {`${el.category
+                    {`${el!.category
                       .slice(0, 1)
-                      .toUpperCase()}${el.category.slice(1)}`}
+                      .toUpperCase()}${el?.category.slice(1)}`}
                   </h5>
                   <h4 className="text-base font-bold">
-                    {el.name.split(" ")[0]}
+                    {el?.name.split(" ")[0]}
                   </h4>
-                  <p className="text-[15px]  text-[#656565]">${el.price}</p>
+                  <p className="text-[15px]  text-[#656565]">${el?.price}</p>
                 </li>
               ))
             : null}
