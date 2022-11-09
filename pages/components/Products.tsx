@@ -12,7 +12,8 @@ const parseNewPage = (pageNumber: number): number => {
 };
 
 const Products = () => {
-  const { currentData, setCurrentPage, currentPage } = useProducts();
+  const { currentData, setCurrentPage, currentPage, handleNewCartItem } =
+    useProducts();
 
   const [currentProductList, setCurrentProductList] = useState<DataEntity[]>();
 
@@ -45,8 +46,9 @@ const Products = () => {
                   height={512.35}
                   src={el.image.src}
                   alt={el.image.alt}
-                  className="h-[512.35px] lg:h-[398.72px] lg:w-[282.02px]"
+                  className="h-[512.35px] cursor-pointer lg:h-[398.72px] lg:w-[282.02px]"
                   quality={100}
+                  onClick={() => handleNewCartItem(el)}
                 />
                 <span className="absolute top-[467px] left-0 right-0 hidden h-[46px] items-center justify-center  bg-black text-[23px] font-medium text-white group-hover:flex lg:top-[353px]">
                   ADD TO CART

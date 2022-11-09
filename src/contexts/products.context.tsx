@@ -29,6 +29,7 @@ const useProductsController = () => {
     oldPage: 1,
     newPage: 1,
   });
+  const [cartItems, setCartItems] = useState<DataEntity[]>([]);
 
   useEffect(() => {
     if (!featuredProduct) {
@@ -64,6 +65,12 @@ const useProductsController = () => {
     handleFilters();
   }, [currentSortBy, currentCategory]);
 
+  const handleNewCartItem = (newCartItem: DataEntity) => {
+    setCartItems([...cartItems, newCartItem]);
+  };
+
+  const handleClearCartItems = (): void => setCartItems([]);
+
   const handleCategories = (filter: string, isChecked: boolean) => {
     if (isChecked) {
       setCurrentCategory([...currentCategory, filter]);
@@ -84,6 +91,9 @@ const useProductsController = () => {
     setCurrentPage,
     currentPage,
     setCurrentSortBy,
+    handleClearCartItems,
+    handleNewCartItem,
+    cartItems,
   };
 };
 
@@ -98,6 +108,9 @@ const ProductsContext = createContext<ReturnType<typeof useProductsController>>(
     setCurrentPage: () => {},
     currentPage: { oldPage: 1, newPage: 1 },
     setCurrentSortBy: () => {},
+    handleClearCartItems: () => {},
+    handleNewCartItem: () => {},
+    cartItems: [],
   }
 );
 

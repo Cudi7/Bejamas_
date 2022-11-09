@@ -1,6 +1,23 @@
-import React from "react";
+import Image from "next/image";
+import React, { useState, useEffect } from "react";
+import { useProducts } from "../../src/contexts/products.context";
 
 const Navbar = () => {
+  const { handleClearCartItems, cartItems } = useProducts();
+  const [currentCartItems, setCurrentCartItems] = useState<number>(0);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (cartItems.length) {
+      setCurrentCartItems(cartItems.length);
+      setIsOpen(true);
+    } else if (!cartItems.length) {
+      setIsOpen(false);
+      setCurrentCartItems(0);
+    }
+    console.log(cartItems);
+  }, [cartItems]);
+
   return (
     <nav className=" flex h-[100%] items-center  ">
       <ul className="flex w-[100%] items-center justify-between">
@@ -23,8 +40,43 @@ const Navbar = () => {
               d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
             />
           </svg>
-          <span className=" absolute right-0 -bottom-1 ml-2 rounded-sm bg-slate-900/90 px-1 text-xs  font-medium text-white lg:py-0.5 lg:px-2 lg:leading-5 ">
-            1
+          {currentCartItems > 0 ? (
+            <span className=" absolute right-0 -bottom-1 ml-2 rounded-sm bg-slate-900/90 px-1 text-xs  font-medium text-white lg:py-0.5 lg:px-2 lg:leading-5 ">
+              {currentCartItems}
+            </span>
+          ) : null}
+          <span
+            className={`${
+              isOpen ? "flex" : "hidden"
+            } absolute right-0 z-10 max-h-[30vw] flex-col overflow-y-scroll border border-slate-200 bg-white p-4 lg:w-[443px]`}
+          >
+            <img className="ml-auto" src="./x.svg" alt="Close Icon" />
+            {cartItems.map((el, index) => (
+              <>
+                <div className="my-5 flex justify-between">
+                  <div>
+                    <h5>{el.name.split(" ")[0]}</h5>
+                    <p>${el.price}</p>
+                  </div>
+                  <Image
+                    src={el.image.src}
+                    alt={el.image.alt}
+                    height={86}
+                    width={149}
+                    className="max-h-[86px] max-w-[149px]"
+                  />
+                </div>
+                {index < cartItems.length - 1 ? (
+                  <div className="w-[388px] border border-slate-100"></div>
+                ) : null}
+              </>
+            ))}
+            <button
+              onClick={handleClearCartItems}
+              className="flex h-[55px] w-[392px] items-center justify-center border-2 border-slate-900 p-4 text-[1.438rem]"
+            >
+              Clear
+            </button>
           </span>
         </li>
       </ul>
