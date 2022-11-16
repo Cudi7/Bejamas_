@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { useProducts } from "../../src/contexts/products.context";
+import { useProducts } from "../contexts/products.context";
 
 const people = [{ name: "Price" }, { name: "Name" }];
 

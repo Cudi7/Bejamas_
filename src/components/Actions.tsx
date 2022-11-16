@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useProducts } from "../../src/contexts/products.context";
+import { useProducts } from "../contexts/products.context";
 
 const categoriesItems: string[] = [
   "People",

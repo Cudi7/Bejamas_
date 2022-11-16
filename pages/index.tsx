@@ -1,17 +1,19 @@
-import type { NextPage } from "next";
+import type { InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 import { useEffect } from "react";
 import { useProducts } from "../src/contexts/products.context";
 import { fetchInitialData } from "../src/helpers/products.api";
 import { Data } from "../src/interfaces/product.interface";
-import Actions from "./components/Actions";
-import Featured from "./components/Featured";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
-import Products from "./components/Products";
+import Actions from "../src/components/Actions";
+import Featured from "../src/components/Featured";
+import Header from "../src/components/Header";
+import Hero from "../src/components/Hero";
+import Navbar from "../src/components/Navbar";
+import Products from "../src/components/Products";
 
-const Home: NextPage<Data> = (props: Data) => {
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
+  props
+) => {
   const { setCurrentData } = useProducts();
 
   useEffect(() => {
@@ -50,6 +52,6 @@ export async function getStaticProps() {
   const dataProps: Data = await fetchInitialData();
 
   return {
-    props: { ...dataProps },
+    props: dataProps,
   };
 }

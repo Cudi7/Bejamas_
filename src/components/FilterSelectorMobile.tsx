@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React from "react";
 import { Fragment, useState } from "react";
-import { useProducts } from "../../src/contexts/products.context";
+import { useProducts } from "../contexts/products.context";
 
 const categoriesItems: string[] = [
   "People",

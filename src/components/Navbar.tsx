@@ -1,6 +1,6 @@
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import { useProducts } from "../../src/contexts/products.context";
+import React, { useState, useEffect, Fragment } from "react";
+import { useProducts } from "../contexts/products.context";
 
 const Navbar = () => {
   const { handleClearCartItems, cartItems } = useProducts();
@@ -64,7 +64,7 @@ const Navbar = () => {
               onClick={handleClose}
             />
             {cartItems.map((el, index) => (
-              <>
+              <Fragment key={index}>
                 <div className="my-5  flex justify-between gap-5">
                   <div>
                     <h5 className="text-[20px] font-bold">
@@ -83,7 +83,7 @@ const Navbar = () => {
                 {index < cartItems.length - 1 ? (
                   <div className="w-[100%] border border-slate-100"></div>
                 ) : null}
-              </>
+              </Fragment>
             ))}
             <button
               onClick={handleClearCartItems}

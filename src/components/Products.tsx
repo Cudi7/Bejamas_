@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { DataEntity } from "../../src/interfaces/product.interface";
+import { DataEntity } from "../interfaces/product.interface";
 import Pagination from "./Pagination";
-import { fetchNewPage } from "../../src/helpers/products.api";
-import { useProducts } from "../../src/contexts/products.context";
+import { fetchNewPage } from "../helpers/products.api";
+import { useProducts } from "../contexts/products.context";
 
 const parseNewPage = (pageNumber: number): number => {
   if (pageNumber === 0) return 9;

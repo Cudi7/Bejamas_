@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { useProducts } from "../../src/contexts/products.context";
+import { useProducts } from "../contexts/products.context";
 
 const Hero = () => {
   const { featuredProduct, handleNewCartItem } = useProducts();

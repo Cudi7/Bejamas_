@@ -44,7 +44,6 @@ const useProductsController = () => {
         currentCategory,
         currentSortBy
       );
-
       setCurrentData(newPage);
     };
 
@@ -58,7 +57,6 @@ const useProductsController = () => {
         currentCategory,
         currentSortBy
       );
-
       setCurrentData(newPage);
     };
 
